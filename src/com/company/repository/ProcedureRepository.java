@@ -8,12 +8,12 @@ import java.util.List;
 
 public class ProcedureRepository {
     HashMap<Long, Procedure> procedures=new HashMap<Long,Procedure>();
-    void addProcedure(Procedure p)
+    public void addProcedure(Procedure p)
     {
         if(!procedures.containsKey(p.getId()))
             procedures.put(p.getId(), p);
     }
-    List<Procedure> getAllConsult()
+    public List<Procedure> getAllConsult()
     {
         List<Procedure> aux= new ArrayList<Procedure>();
         procedures.forEach((key,value)-> aux.add(value));
@@ -22,6 +22,7 @@ public class ProcedureRepository {
     public List<Long> getProcedureMedics(long id)
     {
         List<Long> medics=new ArrayList<Long>();
+
         medics=procedures.get(id).getDoctor_CNP();
         return medics;
     }

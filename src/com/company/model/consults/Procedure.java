@@ -2,11 +2,14 @@ package com.company.model.consults;
 import java.util.List;
 public class Procedure {
     List<Long> doctor_CNP;
-    String speciality;
     String procedure_name;
     long procedure_price;
     static long count=0;
     long id;
+
+    static {
+        count = 0;
+    }
 
     public long getId() {
         return id;
@@ -17,15 +20,15 @@ public class Procedure {
     }
 
     //This constructor is used to add procedures in datebase
-    public Procedure(List<Long> doctor_CNP, String speciality, String procedure_name, long procedure_price) {
+    public Procedure(List<Long> doctor_CNP, String procedure_name, long procedure_price) {
         this.doctor_CNP = doctor_CNP;
-        this.speciality = speciality;
         this.procedure_name = procedure_name;
         this.procedure_price = procedure_price;
+        count++;
+        this.id=count;
     }
     //This constructor is used to add TYPES of procedures
     public Procedure(String speciality, String name, long price) {
-        this.speciality = speciality;
         this.procedure_name=name;
         this.procedure_price=price;
         count++;
@@ -40,13 +43,6 @@ public class Procedure {
         this.doctor_CNP = doctor_CNP;
     }
 
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
-    }
 
     public String getProcedure_name() {
         return procedure_name;

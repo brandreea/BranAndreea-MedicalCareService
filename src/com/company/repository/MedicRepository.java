@@ -15,6 +15,10 @@ public class MedicRepository {
         if(!medics.containsKey(m.getCNP()))
             medics.put(m.getCNP(),m);
     }
+    public Medic getMedic(long cnp)
+    {
+        return medics.get(cnp);
+    }
     public void removeMedic(long cnp)
     {
         if(medics.containsKey(cnp))
@@ -38,8 +42,11 @@ public class MedicRepository {
         List<Medic> departmentDep=new ArrayList<Medic>();
         medics.forEach((key,value)-> departmentDep.add(value));
         for(int i=0;i<departmentDep.size();i++)
-            if(departmentDep.get(i).getSpeciality()!=dep)
-                departmentDep.remove(i);
+        {
+            String s=departmentDep.get(i).getSpeciality();
+
+            if(!s.equals(dep))
+                departmentDep.remove(i);}
             return departmentDep;
     }
 }

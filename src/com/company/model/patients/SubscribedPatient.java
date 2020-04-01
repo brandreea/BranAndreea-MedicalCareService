@@ -7,19 +7,19 @@ public class SubscribedPatient extends Patient {
     int age;
     List<String>medical_history;
 
+    public SubscribedPatient(long CNP, String name, long phone_number, int age) {
+        super(CNP);
+        this.name = name;
+        this.phone_number = phone_number;
+        this.age=age;
+    }
+
     public int getAge() {
         return age;
     }
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public SubscribedPatient(long CNP, String name, long phone_number, int age) {
-        super(CNP);
-        this.name = name;
-        this.phone_number = phone_number;
-        this.age=age;
     }
 
     public List<String> getMedical_history() {
