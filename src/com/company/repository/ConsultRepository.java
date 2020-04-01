@@ -1,5 +1,6 @@
 package com.company.repository;
 import com.company.model.consults.Consult;
+import com.company.model.consults.Prescription;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -29,6 +30,22 @@ public class ConsultRepository {
                 aux.remove(i);
         return aux;
     }
+    public Consult getOneConsult(long id)
+    {
+        return consults.get(id);
+    }
+    public void updateConsult(long id, List<String> symptoms, List<String> diagnose, Prescription p)
+    {
+        Consult aux=consults.get(id);
+        Consult c=consults.get(id);
+        c.setDiagnose(diagnose);
+        c.setSymptoms(symptoms);
+        c.setPrescription(p);
+        consults.replace(id, aux, c);
+    }
+    public void addPrescription()
+    {
 
+    }
 
 }

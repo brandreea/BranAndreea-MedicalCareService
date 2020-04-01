@@ -1,13 +1,16 @@
 package com.company.repository;
 
 import com.company.model.consults.Prescription;
+import com.company.model.patients.SubscribedPatient;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PrescriptionRepository {
     List<Prescription> prescriptions=new ArrayList<Prescription>();
-    void addProcedure(Prescription p)
+    HashMap<Long, Prescription> prescriptionMap=new HashMap<Long,Prescription>();
+    void addPrescription(Prescription p)
     {
         prescriptions.add(p);
 
@@ -16,4 +19,5 @@ public class PrescriptionRepository {
     {
         return prescriptions;
     }
+
 }
