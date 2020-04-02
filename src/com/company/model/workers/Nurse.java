@@ -21,8 +21,4 @@ public class Nurse extends employee {
         this.department = department;
     }
 
-    @Override
-    public void sth() {
-
-    }
 }

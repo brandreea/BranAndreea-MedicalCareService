@@ -19,8 +19,4 @@ public class Medic extends employee {
         return this.speciality;
     }
 
-    @Override
-    public void sth() {
-
-    }
 }

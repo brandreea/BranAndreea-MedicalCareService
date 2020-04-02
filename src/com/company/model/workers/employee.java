@@ -49,6 +49,5 @@ public abstract class employee {
         return hire_date;
     }
 
-    public abstract void sth();
 
 }
