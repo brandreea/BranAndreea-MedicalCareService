@@ -1,8 +1,10 @@
 package com.medicalservice.Main;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.medicalservice.model.filemanagement.FileUtilsRead;
 import com.medicalservice.model.filemanagement.FileUtilsWrite;
 import com.medicalservice.model.patients.SubscribedPatient;
 import com.medicalservice.model.workers.Medic;
+import com.medicalservice.model.workers.Nurse;
 import com.medicalservice.service.*;
 import com.medicalservice.service.Service;
 
@@ -61,6 +63,14 @@ public class Main {
 
         //test fileRead
       FileUtilsWrite write=FileUtilsWrite.getInstance();
-      write.writeFile(m,"orderLines.csv");
+      write.writeFile(m,"medics.csv");
+      write.writeFile(p,"subscribedPatients");
+//      FileUtilsWrite writeNurse=FileUtilsWrite.getInstance
+      FileUtilsRead read=FileUtilsRead.getInstance();
+      List<Medic> retrievedMedics=read.readFile("medics.csv", new Medic("","",123));
+      for(int i=0;i<retrievedMedics.size();i++)
+        System.out.println(retrievedMedics.get(i).toString());
+      System.out.println(retrievedMedics);
+
     }
 }

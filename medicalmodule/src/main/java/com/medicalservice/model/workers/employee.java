@@ -1,28 +1,39 @@
 package com.medicalservice.model.workers;
 import java.util.Date;
 public abstract class employee {
-    String Name;
+    String name;
     long CNP;
     long salary;
     Date hire_date;
+    public employee(){
+        this.name="none";
+        this.CNP=0;
+        this.salary=0;
+    }
+    public employee(String name, long CNP, long salary, Date hire_date) {
+        this.name = name;
+        this.CNP = CNP;
+        this.salary = salary;
+        this.hire_date = hire_date;
+    }
 
     public employee(String name, long CNP, long salary) {
-        Name = name;
+        this.name = name;
         this.CNP = CNP;
         this.salary = salary;
        // this.hire_date = hire_date;
     }
     public employee(String name, long CNP) {
-        Name = name;
+        this.name = name;
         this.CNP = CNP;
 
     }
     public String getName() {
-        return Name;
+        return this.name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public long getCNP() {
