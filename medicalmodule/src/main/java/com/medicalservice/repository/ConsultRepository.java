@@ -9,9 +9,9 @@ public class ConsultRepository {
     HashMap<Long,Consult> consults=new HashMap<Long,Consult>();
 
 
-    public void addConsult(long doctorCNP, long patientCNP)
+    public void addConsult(Consult c)
     {
-        Consult c = new Consult(doctorCNP, patientCNP);
+       // Consult c = new Consult(doctorCNP, patientCNP);
         if(!consults.containsKey(c.getId()))
             consults.put(c.getId(), c);
     }
@@ -34,7 +34,7 @@ public class ConsultRepository {
     {
         return consults.get(id);
     }
-    public void updateConsult(long id, List<String> symptoms, List<String> diagnose, Prescription p)
+    public void updateConsult(long id, String symptoms, String diagnose, int p)
     {
         Consult aux=consults.get(id);
         Consult c=consults.get(id);

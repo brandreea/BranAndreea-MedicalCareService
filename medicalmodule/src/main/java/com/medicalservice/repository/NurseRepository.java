@@ -10,9 +10,9 @@ public class NurseRepository {
 
     private HashMap<Long, Nurse> nurses=new HashMap<>();
 
-    public void addNurse(String name, long cnp, String dep)
+    public void addNurse(Nurse n)
     {
-        Nurse n=new Nurse(name, cnp, dep);
+        //Nurse n=new Nurse(name, cnp, dep);
         if(!nurses.containsKey(n.getCNP()))
            nurses.put(n.getCNP(),n);
     }

@@ -5,10 +5,12 @@ public class Consult {
     long patient_CNP;
     static long count=0;
     long id;
-    List<String>symptoms;
-    List<String>diagnose;
-    Prescription prescription;
+    String symptoms;
+    String diagnose;
+    int prescription;
+    public Consult(){
 
+    }
     public long getId() {
         return id;
     }
@@ -22,16 +24,16 @@ public class Consult {
         this.id=count;
         this.doctor_CNP = doctor_CNP;
         this.patient_CNP = patient_CNP;
-        this.prescription=new Prescription();
+        this.prescription=-1;
     }
-    public void addSymptoms(String s)
-    {
-        symptoms.add(s);
-    }
-    public void addDiagnose(String d)
-    {
-        symptoms.add(d);
-    }
+//    public void addSymptoms(String s)
+//    {
+//        symptoms.add(s);
+//    }
+//    public void addDiagnose(String d)
+//    {
+//        symptoms.add(d);
+//    }
     public long getDoctor_CNP() {
         return doctor_CNP;
     }
@@ -48,27 +50,27 @@ public class Consult {
         this.patient_CNP = patient_CNP;
     }
 
-    public List<String> getSymptoms() {
+    public String getSymptoms() {
         return symptoms;
     }
 
-    public void setSymptoms(List<String> symptoms) {
+    public void setSymptoms(String symptoms) {
         this.symptoms = symptoms;
     }
 
-    public List<String> getDiagnose() {
+    public String getDiagnose() {
         return diagnose;
     }
 
-    public void setDiagnose(List<String> diagnose) {
+    public void setDiagnose(String diagnose) {
         this.diagnose = diagnose;
     }
 
-    public Prescription getPrescription() {
+    public int getPrescription() {
         return prescription;
     }
 
-    public void setPrescription(Prescription prescription) {
+    public void setPrescription(int prescription) {
         this.prescription = prescription;
     }
 }

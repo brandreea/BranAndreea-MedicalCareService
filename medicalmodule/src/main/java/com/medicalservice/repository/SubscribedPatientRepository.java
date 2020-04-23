@@ -23,5 +23,11 @@ public class SubscribedPatientRepository {
     {
         return patients;
     }
+    public SubscribedPatient getPatient(long cnp)
+    {
+        if(patientsMap.containsKey(cnp))
+            return patientsMap.get(cnp);
+        return null;
+    }
 
 }

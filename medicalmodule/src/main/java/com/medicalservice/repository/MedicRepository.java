@@ -14,6 +14,12 @@ public class MedicRepository {
         if(!medics.containsKey(m.getCNP()))
             medics.put(m.getCNP(),m);
     }
+    public void addMedic(Medic m)
+    {
+
+        if(!medics.containsKey(m.getCNP()))
+            medics.put(m.getCNP(),m);
+    }
     public Medic getMedic(long cnp)
     {
         return medics.get(cnp);
