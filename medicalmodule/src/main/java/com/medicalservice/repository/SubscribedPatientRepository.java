@@ -16,8 +16,9 @@ public class SubscribedPatientRepository {
     public void addSubscribedPatient(Long cnp, String name, long phone, int age)
     {
         SubscribedPatient p=new SubscribedPatient(cnp,name,phone,age);
-        patientsMap.put(cnp,p);
-        patients.add(p);
+        if(!patientsMap.containsKey(cnp))
+        {patientsMap.put(cnp,p);
+        patients.add(p);}
     }
     public List<SubscribedPatient> getAllSubPatient()
     {

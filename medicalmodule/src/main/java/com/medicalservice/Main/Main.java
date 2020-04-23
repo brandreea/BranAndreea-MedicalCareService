@@ -21,50 +21,46 @@ public class Main {
 
       FileUtilsWrite write=FileUtilsWrite.getInstance();
       FileUtilsRead read=FileUtilsRead.getInstance();
-
-      List<Medic> retrievedMedics=read.readFile("medics.csv", new Medic("","",123));
-      for(int i=0;i<retrievedMedics.size();i++)
-        s.addMedic(retrievedMedics.get(i));
-
+      //1
+      s.addMedic(new Medic("Test Doctor","Infectious diseases", 1234667));
       //2
-      List<Nurse> retrievedNurses=read.readFile("nurses.csv", new Nurse("",0,""));
-      for(int i=0;i<retrievedNurses.size();i++)
-        s.addNurse(retrievedNurses.get(i));
-      s.addNurse(new Nurse("Ionescu Theodor",3455,"Infectious Diseases"));
-      //write.("nurse.csv",new Nurse("",0,""));
-//      n.add(new Nurse("Dana Ionescu",3457,"Neurology"));
-//      write.writeFile(n,"nurses.csv");
+      s.addNurse(new Nurse("Test Nurse",345588,"Infectious Diseases"));
 
-//      s.addNurse("Ana Popescu", 3456, "Infectious Diseases");
-      s.addSubscribedPatient(9999, "Bill Gates", 56789,50);
+      //4
+      s.addSubscribedPatient(999999, "Test Patient", 56788,40);
       //3
       List<Consult> retrievedConsults=read.readFile("consults.csv",new Consult(0,0));
       for(int i=0;i<retrievedConsults.size();i++)
         s.addConsult(retrievedConsults.get(i));
 
-      //4
 
-
-     //5
+      //5
       List<Long> someMedics=new ArrayList<Long>();
       someMedics.add((long) 234567);
       someMedics.add((long)111111);
       s.addProcedure(someMedics, "electroencephalogram",2000);
 
       //6
-      List<Medication> retrievedMedication=read.readFile("medication.csv",new Medication("",0,0));
-      for(int i=0;i<retrievedMedication.size();i++)
-        s.addMedication(retrievedMedication.get(i));
-      //7
       List<Medic> m= s.viewMedicsByDepartment("neurology");
       for(Medic medic: m)
-          System.out.print(medic.getName()+" ");
+        System.out.print(medic.getName()+" ");
+
+      //7
+      System.out.println("By consult");
+      List<Consult>c=s.viewConsultsByMedic(234567);
+      for(int i=0;i<c.size();i++)
+        System.out.println("Consult to"+c.get(i).getDoctor_CNP()+" "+c.get(i).getPatient_CNP()+"id:"+c.get(i).getId());
+      System.out.println();
+
       //8
+        s.addMedication(new Medication("Test medication",100,25));
+
+      //9
         System.out.println("\n\nBy procedure:");
         m=s.viewMedicProcedure(1);
         for(Medic medic: m)
             System.out.println(medic.getName());
-        //9
+        //11
         System.out.println("\n\nPatients:");
         List<SubscribedPatient> p= s.viewSubscribedPatients();
         for(SubscribedPatient pat:p)
@@ -72,20 +68,16 @@ public class Main {
         //10
         System.out.println("\n\nUpdate Consult");
         String symp="hearing sounds where they are not, headache";
-
-
         String diagnose = "self stimulation in the brain of an unstimulated area; sane.";
         s.updateConsult(1,symp, diagnose, "none", 1);
 
+        //12
 
-        //test fileRead
-//      write.writeFile(m,"medics.csv");
-//      write.writeFile(p,"subscribedPatients.csv");
-//      FileUtilsWrite writeNurse=FileUtilsWrite.getInstance
-      //List<Medic> retrievedMedics=read.readFile("medics.csv", new Medic("","",123));
-//      for(int i=0;i<retrievedMedics.size();i++)
-//        System.out.println(retrievedMedics.get(i).toString());
-//      System.out.println(retrievedMedics);
+        //13
+        s.addQuantity("Nurofen", 100);
+
+        //14
+        s.deleteQuantity("Nurofen", 10);
 
     }
 }

@@ -37,7 +37,6 @@ public class FileUtilsWrite<T> {
         System.out.println(jsonElements.fieldNames().toString());
         CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
 
-        System.out.println(jsonStr);
         System.out.println(jsonElements.toString());
         System.out.println(jsonElements.get(0).toString());
         jsonElements.fields().forEachRemaining(x->System.out.println(x.getKey()));
