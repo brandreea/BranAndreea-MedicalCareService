@@ -25,7 +25,7 @@ public class FileUtilsWrite<T> {
     }
     public void writeFile(List<T> elements, String path) throws IOException {
 
-        List<String> elementsToWrite=new ArrayList<>();
+
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonStr = objectMapper.writeValueAsString(elements);
 
@@ -33,7 +33,8 @@ public class FileUtilsWrite<T> {
         CsvSchema.Builder csvSchemaBuilder = CsvSchema.builder();
 
         jsonElements.elements().next().fieldNames()
-                .forEachRemaining(fieldName -> {csvSchemaBuilder.addColumn(fieldName);} );
+                .forEachRemaining(f -> {csvSchemaBuilder.addColumn(f);} );
+
         System.out.println(jsonElements.fieldNames().toString());
         CsvSchema csvSchema = csvSchemaBuilder.build().withHeader();
 

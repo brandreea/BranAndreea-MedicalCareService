@@ -2,9 +2,10 @@ package com.medicalservice.model.filemanagement;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
+
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
+
 
 
 import java.io.File;
@@ -28,11 +29,11 @@ public class FileUtilsRead<T> {
         CsvSchema objectSchema = CsvSchema.emptySchema().withHeader();
         CsvMapper csvMapper = new CsvMapper();
 
-        MappingIterator<T> orderLines = csvMapper.readerFor(elem.getClass())
+        MappingIterator<T> genericClassType = csvMapper.readerFor(elem.getClass())
                 .with(objectSchema)
                 .readValues(new File(filePath));
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<T> elementList=orderLines.readAll();
+
+        List<T> elementList= genericClassType.readAll();
         return elementList;
     }
 }
