@@ -24,11 +24,9 @@ public class Service {
     private FileUtilsWrite write;
     private FileUtilsRead read;
     private MedicRepository medicRepo = new MedicRepository();
-//    private NurseRepository nurseRepo = new NurseRepository();
     private ConsultRepository consultRepo = new ConsultRepository();
     private ProcedureRepository procedureRepo = new ProcedureRepository();
     private SubscribedPatientRepository subPatientRepo = new SubscribedPatientRepository();
-    private MedicationRepository medicationRepo= new MedicationRepository();
     private UnsubscribedPatientRepository patientRepository=new UnsubscribedPatientRepository();
     private Service() throws IOException {
         actionWrite=ActionsWrite.getInstance();
@@ -168,25 +166,5 @@ public class Service {
     }
 
     //12
-    public List<Medication> viewMedication() throws IOException {
-        actionWrite.writeAction("viewMedication", new Timestamp(System.currentTimeMillis()));
-        return medicationRepo.getAllMedication();
-    }
-
-    //13
-//    public void addQuantity(String name, int q) throws IOException {
-//       int ok= medicationRepo.increaseQuantity(name,q);
-//        List<Medication> med=medicationRepo.getAllMedication();
-//        write.writeFile(med,"medication.csv");
-//        actionWrite.writeAction("increaseMedicaion", new Timestamp(System.currentTimeMillis()));
-//    }
-//
-//    //14
-//    public void deleteQuantity(String name, int q) throws IOException {
-//        medicationRepo.decreaseQuantity(name,q);
-//        List<Medication> med=medicationRepo.getAllMedication();
-//        write.writeFile(med,"medication.csv");
-//        actionWrite.writeAction("deleteMedicaion", new Timestamp(System.currentTimeMillis()));
-//    }
 
 }

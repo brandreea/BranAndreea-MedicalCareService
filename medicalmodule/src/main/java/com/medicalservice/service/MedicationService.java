@@ -52,5 +52,8 @@ public class MedicationService {
         write.writeFile(med,"medication.csv");
         actionWrite.writeAction("deleteMedicaion", new Timestamp(System.currentTimeMillis()));
     }
-
+    public List<Medication> viewMedication() throws IOException {
+        actionWrite.writeAction("viewMedication", new Timestamp(System.currentTimeMillis()));
+        return medicationRepo.getAllMedication();
+    }
 }

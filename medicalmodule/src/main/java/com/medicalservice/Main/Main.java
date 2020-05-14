@@ -18,14 +18,13 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
       Service s=Service.getInstance();
-      MedicService medicService=MedicService.getInstance();
       NurseService nurseService=NurseService.getInstance();
       MedicationService medicationService=MedicationService.getInstance();
       FileUtilsWrite write=FileUtilsWrite.getInstance();
       FileUtilsRead read=FileUtilsRead.getInstance();
       //1
 
-      medicService.addMedic(new Medic("Test Doctor","Infectious diseases", 1234667));
+      s.addMedic(new Medic("Test Doctor","Infectious diseases", 1234667));
       //2
       nurseService.addNurse(new Nurse("Test Nurse",345588,"Infectious Diseases"));
 
@@ -44,7 +43,7 @@ public class Main {
       s.addProcedure(someMedics, "electroencephalogram",2000);
 
       //6
-      List<Medic> m= medicService.viewMedicsByDepartment("neurology");
+      List<Medic> m= s.viewMedicsByDepartment("neurology");
       for(Medic medic: m)
         System.out.print(medic.getName()+" ");
 
