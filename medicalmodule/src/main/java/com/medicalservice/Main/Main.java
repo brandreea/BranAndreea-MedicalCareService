@@ -18,13 +18,16 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
       Service s=Service.getInstance();
-
+      MedicService medicService=MedicService.getInstance();
+      NurseService nurseService=NurseService.getInstance();
+      MedicationService medicationService=MedicationService.getInstance();
       FileUtilsWrite write=FileUtilsWrite.getInstance();
       FileUtilsRead read=FileUtilsRead.getInstance();
       //1
-      s.addMedic(new Medic("Test Doctor","Infectious diseases", 1234667));
+
+      medicService.addMedic(new Medic("Test Doctor","Infectious diseases", 1234667));
       //2
-      s.addNurse(new Nurse("Test Nurse",345588,"Infectious Diseases"));
+      nurseService.addNurse(new Nurse("Test Nurse",345588,"Infectious Diseases"));
 
       //4
       s.addSubscribedPatient(999999, "Test Patient", 56788,40);
@@ -41,7 +44,7 @@ public class Main {
       s.addProcedure(someMedics, "electroencephalogram",2000);
 
       //6
-      List<Medic> m= s.viewMedicsByDepartment("neurology");
+      List<Medic> m= medicService.viewMedicsByDepartment("neurology");
       for(Medic medic: m)
         System.out.print(medic.getName()+" ");
 
@@ -53,7 +56,7 @@ public class Main {
       System.out.println();
 
       //8
-        s.addMedication(new Medication("Test medication",100,25));
+        medicationService.addMedication(new Medication("Test medication",100,25));
 
       //9
         System.out.println("\n\nBy procedure:");
@@ -74,10 +77,10 @@ public class Main {
         //12
 
         //13
-        s.addQuantity("Nurofen", 100);
+        medicationService.addQuantity("Nurofen", 100);
 
         //14
-        s.deleteQuantity("Nurofen", 10);
+        medicationService.deleteQuantity("Nurofen", 10);
 
     }
 }

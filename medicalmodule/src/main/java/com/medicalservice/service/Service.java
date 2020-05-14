@@ -24,7 +24,7 @@ public class Service {
     private FileUtilsWrite write;
     private FileUtilsRead read;
     private MedicRepository medicRepo = new MedicRepository();
-    private NurseRepository nurseRepo = new NurseRepository();
+//    private NurseRepository nurseRepo = new NurseRepository();
     private ConsultRepository consultRepo = new ConsultRepository();
     private ProcedureRepository procedureRepo = new ProcedureRepository();
     private SubscribedPatientRepository subPatientRepo = new SubscribedPatientRepository();
@@ -41,9 +41,9 @@ public class Service {
         for(int i=0;i<retrievedMedics.size();i++)
             addMedic(retrievedMedics.get(i));
         //NURSES
-        List<Nurse> retrievedNurses=read.readFile("nurses.csv", new Nurse("",0,""));
-        for(int i=0;i<retrievedNurses.size();i++)
-            addNurse(retrievedNurses.get(i));
+//        List<Nurse> retrievedNurses=read.readFile("nurses.csv", new Nurse("",0,""));
+//        for(int i=0;i<retrievedNurses.size();i++)
+//            addNurse(retrievedNurses.get(i));
         //SUBSCRIBED PATIENTS
         List<SubscribedPatient> retrievedPatients=read.readFile("subscribedPatients.csv",new SubscribedPatient(0,"",0,0));
         for(int i=0;i<retrievedPatients.size();i++) {
@@ -55,9 +55,9 @@ public class Service {
         for(int i=0;i<retrievedConsults.size();i++)
             addConsult(retrievedConsults.get(i));
         //MEDICATION
-        List<Medication> retrievedMedication=read.readFile("medication.csv",new Medication("",0,0));
-        for(int i=0;i<retrievedMedication.size();i++)
-             addMedication(retrievedMedication.get(i));
+//        List<Medication> retrievedMedication=read.readFile("medication.csv",new Medication("",0,0));
+//        for(int i=0;i<retrievedMedication.size();i++)
+//             addMedication(retrievedMedication.get(i));
 
         System.out.println("Service on!");
     }
@@ -86,13 +86,13 @@ public class Service {
     }
 
     //2
-    public void addNurse(Nurse n) throws IOException {
-        nurseRepo.addNurse(n);
-        System.out.println("Added nurse " + n.getName());
-        List<Nurse> nurses=nurseRepo.getNurses();
-        write.writeFile(nurses,"nurses.csv");
-        actionWrite.writeAction("addNurse", new Timestamp(System.currentTimeMillis()));
-    }
+//    public void addNurse(Nurse n) throws IOException {
+//        nurseRepo.addNurse(n);
+//        System.out.println("Added nurse " + n.getName());
+//        List<Nurse> nurses=nurseRepo.getNurses();
+//        write.writeFile(nurses,"nurses.csv");
+//        actionWrite.writeAction("addNurse", new Timestamp(System.currentTimeMillis()));
+//    }
 
     //3
     public void addConsult(Consult c) throws IOException {
@@ -135,14 +135,14 @@ public class Service {
         return consultRepo.viewByMedic(cnp);
     }
 
-    //8
-    public void addMedication(Medication m) throws IOException {
-        medicationRepo.addMedication(m);
-        System.out.println("Added "+ m.getName()+ " to stock!");
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("addMedicaion", new Timestamp(System.currentTimeMillis()));
-    }
+//    //8
+//    public void addMedication(Medication m) throws IOException {
+//        medicationRepo.addMedication(m);
+//        System.out.println("Added "+ m.getName()+ " to stock!");
+//        List<Medication> med=medicationRepo.getAllMedication();
+//        write.writeFile(med,"medication.csv");
+//        actionWrite.writeAction("addMedicaion", new Timestamp(System.currentTimeMillis()));
+//    }
 
     //9
     public List<Medic> viewMedicProcedure(long id) throws IOException {
@@ -174,19 +174,19 @@ public class Service {
     }
 
     //13
-    public void addQuantity(String name, int q) throws IOException {
-       int ok= medicationRepo.increaseQuantity(name,q);
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("increaseMedicaion", new Timestamp(System.currentTimeMillis()));
-    }
-
-    //14
-    public void deleteQuantity(String name, int q) throws IOException {
-        medicationRepo.decreaseQuantity(name,q);
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("deleteMedicaion", new Timestamp(System.currentTimeMillis()));
-    }
+//    public void addQuantity(String name, int q) throws IOException {
+//       int ok= medicationRepo.increaseQuantity(name,q);
+//        List<Medication> med=medicationRepo.getAllMedication();
+//        write.writeFile(med,"medication.csv");
+//        actionWrite.writeAction("increaseMedicaion", new Timestamp(System.currentTimeMillis()));
+//    }
+//
+//    //14
+//    public void deleteQuantity(String name, int q) throws IOException {
+//        medicationRepo.decreaseQuantity(name,q);
+//        List<Medication> med=medicationRepo.getAllMedication();
+//        write.writeFile(med,"medication.csv");
+//        actionWrite.writeAction("deleteMedicaion", new Timestamp(System.currentTimeMillis()));
+//    }
 
 }
