@@ -7,7 +7,7 @@ public class UnsubscribedPatient extends Patient {
         this.diagnostic = diagnostic;
     }
 
-    public UnsubscribedPatient(long CNP, String diagnostic) {
+    public UnsubscribedPatient(int CNP, String diagnostic) {
         super(CNP);
         this.diagnostic = diagnostic;
     }

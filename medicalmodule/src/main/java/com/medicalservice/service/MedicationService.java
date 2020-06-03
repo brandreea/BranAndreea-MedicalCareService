@@ -8,52 +8,45 @@ import com.medicalservice.model.workers.Medic;
 import com.medicalservice.repository.MedicationRepository;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
 public class MedicationService {
-    private MedicationRepository medicationRepo= new MedicationRepository();
-    private ActionsWrite actionWrite;
+    private MedicationRepository medicationRepo;
+    private Connection connection;
+    private ActionsWrite actionWrite=ActionsWrite.getInstance();
     private FileUtilsWrite write;
     private FileUtilsRead read;
     private static MedicationService instance;
 
-    private MedicationService() throws IOException {
-        actionWrite=ActionsWrite.getInstance();
-        write=FileUtilsWrite.getInstance();
-        read=FileUtilsRead.getInstance();
-        List<Medication> retrievedMedication=read.readFile("medication.csv",new Medication("",0,0));
-        for(int i=0;i<retrievedMedication.size();i++)
-            addMedication(retrievedMedication.get(i));
+    private MedicationService(Connection connection) throws IOException, SQLException {
+        this.connection = connection;
+        medicationRepo = new MedicationRepository(connection);
     }
-    public static MedicationService getInstance() throws IOException {
+    public static MedicationService getInstance(Connection connection) throws IOException, SQLException {
         if(instance==null)
-            instance=new MedicationService();
+            instance=new MedicationService(connection);
         return instance;
     }
-    public void addMedication(Medication m) throws IOException {
-        medicationRepo.addMedication(m);
+    public void save(Medication m) throws IOException, SQLException {
+        medicationRepo.save(m);
         System.out.println("Added "+ m.getName()+ " to stock!");
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("addMedicaion", new Timestamp(System.currentTimeMillis()));
+        actionWrite.writeAction("saveMedication", new Timestamp(System.currentTimeMillis()),Thread.currentThread().getName());
     }
-    public void addQuantity(String name, int q) throws IOException {
-        int ok= medicationRepo.increaseQuantity(name,q);
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("increaseMedicaion", new Timestamp(System.currentTimeMillis()));
+    public List<Medication> getAll() throws SQLException, IOException {
+        actionWrite.writeAction("getAllMedication", new Timestamp(System.currentTimeMillis()),Thread.currentThread().getName());
+        return medicationRepo.getAll();
     }
 
-    //14
-    public void deleteQuantity(String name, int q) throws IOException {
-        medicationRepo.decreaseQuantity(name,q);
-        List<Medication> med=medicationRepo.getAllMedication();
-        write.writeFile(med,"medication.csv");
-        actionWrite.writeAction("deleteMedicaion", new Timestamp(System.currentTimeMillis()));
+    public void delete(String name) throws SQLException, IOException {
+        medicationRepo.delete(name);
+        actionWrite.writeAction("deleteMedication", new Timestamp(System.currentTimeMillis()),Thread.currentThread().getName());
     }
-    public List<Medication> viewMedication() throws IOException {
-        actionWrite.writeAction("viewMedication", new Timestamp(System.currentTimeMillis()));
-        return medicationRepo.getAllMedication();
+    public void update(String name, int quantity) throws SQLException, IOException {
+        medicationRepo.update(name,quantity);
+        actionWrite.writeAction("updateMedication", new Timestamp(System.currentTimeMillis()),Thread.currentThread().getName());
     }
+
 }

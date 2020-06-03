@@ -2,46 +2,63 @@ package com.medicalservice.repository;
 
 import com.medicalservice.model.medication.Medication;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MedicationRepository {
-    HashMap<String, Medication> medicationMap=new HashMap<String,Medication>();
-   // List<Medication> medication =new ArrayList<Medication>();
-    public void addMedication(Medication m)
-    {
+    private final Connection connection;
+    public MedicationRepository(Connection connection){
+        this.connection=connection;
+    }
+
+    public List<Medication> getAll() throws SQLException {
+        List<Medication> medications = new ArrayList<>();
+        String sqlGet = "SELECT * FROM medication";
+        PreparedStatement statement = connection.prepareStatement(sqlGet);
+        ResultSet rs = statement.executeQuery();
+        while (rs.next())   {
+            Medication m = new Medication(rs.getString(1),rs.getInt(2), rs.getInt(3));
+            medications.add(m);
+        }
+        return medications;
+    }
+
+    public void save(Medication m) throws SQLException {
        // medication.add(m);
-        medicationMap.put(m.getName(), m);
+        String sqlAdd = "INSERT INTO medication VALUES (?, ?, ?)";
+
+        PreparedStatement statement =  connection.prepareStatement(sqlAdd);
+        statement.setString(1,  m.getName());
+        statement.setInt(2,  m.getQuantity());
+        statement.setInt(3,m.getPrice());
+        statement.executeUpdate();
     }
-    public Medication getMedicationByName(String name)
-    {
-        return medicationMap.get(name);
+
+
+    public void delete(String name) throws SQLException {
+        String sqlAdd = "DELETE FROM medication WHERE name LIKE(?)";
+        PreparedStatement statement =  connection.prepareStatement(sqlAdd);
+        statement.setString(1,  name);
+        statement.executeUpdate();
     }
-    public List<Medication>getAllMedication()
-    {
-        List<Medication> medication=new ArrayList<Medication>();
-        medicationMap.forEach((key,value)->medication.add(value));
-        return medication;
-    }
-    public int decreaseQuantity(String name, int q)
-    {
-        int oldQ=medicationMap.get(name).getQuantity();
-        if(oldQ==0) return -1;
-        if(oldQ<q)  return (oldQ-q);
-        Medication m= medicationMap.get(name);
-        Medication mNew= medicationMap.get(name);
-        mNew.setQuantity(oldQ-q);
-        medicationMap.replace(name, m, mNew);
-        return 1;
-    }
-    public int increaseQuantity(String name, int q)
-    {
-        int oldQ=medicationMap.get(name).getQuantity();
-        Medication m= medicationMap.get(name);
-        Medication mNew= medicationMap.get(name);
-        mNew.setQuantity(oldQ+q);
-        medicationMap.replace(name, m, mNew);
-        return 1;
+//    private int getQuantity(String name) throws SQLException {
+//        String sqlAdd = "SELECT quantity FROM medication WHERE name LIKE(?)";
+//        PreparedStatement statement =  connection.prepareStatement(sqlAdd);
+//        statement.setString(1,  name);
+//        ResultSet rs = statement.executeQuery();
+//        return rs.next().(1);
+//
+//    }
+    public void update(String name, int quantity) throws SQLException {
+            String sqlGet = "UPDATE medication SET quantity = (?) WHERE name LIKE(?);";
+            PreparedStatement statement = connection.prepareStatement(sqlGet);
+            statement.setString(2,name);
+            statement.setInt(1, quantity);
+            statement.executeUpdate();
     }
 }

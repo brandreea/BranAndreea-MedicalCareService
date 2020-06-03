@@ -1,7 +1,7 @@
 package com.medicalservice.model.consults;
 import java.util.List;
 public class Procedure {
-    List<Long> doctor_CNP;
+    List<Integer> doctor_CNP;
     String procedure_name;
     long procedure_price;
     static long count=0;
@@ -20,7 +20,7 @@ public class Procedure {
     }
 
     //This constructor is used to add procedures in datebase
-    public Procedure(List<Long> doctor_CNP, String procedure_name, long procedure_price) {
+    public Procedure(List<Integer> doctor_CNP, String procedure_name, long procedure_price) {
         this.doctor_CNP = doctor_CNP;
         this.procedure_name = procedure_name;
         this.procedure_price = procedure_price;
@@ -35,11 +35,11 @@ public class Procedure {
         this.id=count;
     }
 
-    public List<Long> getDoctor_CNP() {
+    public List<Integer> getDoctor_CNP() {
         return doctor_CNP;
     }
 
-    public void setDoctor_CNP(List<Long> doctor_CNP) {
+    public void setDoctor_CNP(List<Integer> doctor_CNP) {
         this.doctor_CNP = doctor_CNP;
     }
 

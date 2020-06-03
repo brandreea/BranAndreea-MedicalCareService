@@ -3,20 +3,21 @@ import java.util.Date;
 import java.util.List;
 public class Medic extends employee {
     String speciality;
+
     public Medic(){
 
     }
-    public Medic(String name, long CNP, long salary) {
+    public Medic(String name, int CNP, int salary) {
         super(name, CNP, salary);
     }
-    public Medic(String name, String department, long CNP)
+    public Medic(String name, String department, int CNP)
     {
         super(name,CNP);
         speciality=department;
     }
 
-    public Medic(long salary, Date hire_date, String speciality,String name, long CNP) {
-        super(name, CNP, salary, hire_date);
+    public Medic(int salary, Date hire_date, String speciality,String name, int CNP) {
+        super(name,hire_date, CNP,salary);
         this.speciality = speciality;
     }
 
@@ -29,6 +30,6 @@ public class Medic extends employee {
     }
     @Override
     public String toString(){
-        return name.toString()+" "+speciality.toString();
+        return name.toString()+" "+speciality.toString()+"\n";
     }
 }

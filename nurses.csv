@@ -1,2 +1,2 @@
-name,salary,hire_date,department,cnp
-"Test Nurse",0,,"Infectious Diseases",345588
+name,salary,hire_date,id,department,cnp
+"Test Nurse",0,,0,"Infectious Diseases",345588

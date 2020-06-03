@@ -19,9 +19,9 @@ public class ProcedureRepository {
         procedures.forEach((key,value)-> aux.add(value));
         return aux;
     }
-    public List<Long> getProcedureMedics(long id)
+    public List<Integer> getProcedureMedics(long id)
     {
-        List<Long> medics=new ArrayList<Long>();
+        List<Integer> medics=new ArrayList<>();
 
         medics=procedures.get(id).getDoctor_CNP();
         return medics;

@@ -1,21 +1,22 @@
 package com.medicalservice.model.patients;
 
 public abstract class Patient {
-   long CNP;
+   int CNP;
+
    public Patient()
    {
        this.CNP=0;
    }
 
-    public Patient(long CNP) {
+    public Patient(int CNP) {
         this.CNP = CNP;
     }
 
-    public long getCNP() {
+    public int getCNP() {
         return CNP;
     }
 
-    public void setCNP(long CNP) {
+    public void setCNP(int CNP) {
         this.CNP = CNP;
     }
 }

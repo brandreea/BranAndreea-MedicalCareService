@@ -15,12 +15,14 @@ public class ActionsWrite {
             instance=new ActionsWrite();
         return instance;
     }
-    public void writeAction(String name, Timestamp time) throws IOException {
+    public void writeAction(String name, Timestamp time, String threadName) throws IOException {
         FileWriter csv=new FileWriter(path,true);
         System.out.println("In writeactions");
         csv.append(name);
         csv.append(",");
         csv.append(time.toString());
+        csv.append(",");
+        csv.append(threadName);
         csv.append("\n");
         csv.flush();
         csv.close();

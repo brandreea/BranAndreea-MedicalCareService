@@ -6,6 +6,7 @@ public class Prescription {
     String otherRecommendations;
     int quantityPerTaking;
     int daysNumber;
+    long id=0;
     String momentsOfDay;
     int prescriptionId;
 
